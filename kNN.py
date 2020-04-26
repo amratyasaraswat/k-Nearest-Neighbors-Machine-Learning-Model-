@@ -1,5 +1,5 @@
-# Written by Amratya Saraswat
-# Email - amratyasaraswat@gmail.com
+# Author: Amratya Saraswat
+# Email: amratyasaraswat@gmail.com
 
 #From the console, run the following
 #pip install numpy
@@ -118,9 +118,6 @@ mp.ylabel("Intensity Variance")
 mp.title("Figure 1.2 Decision Region for 2D")
 show()
 
-######################################
-# Question 3(c)
-
 #Euclidean 2D
 euc2dList = []
 model3 = KNeighborsClassifier(n_neighbors=1, metric='euclidean')
@@ -161,7 +158,6 @@ cheb2dScore = cross_val_score(model7, simpleTrain, trainDigits, cv = 10)
 cheb2dList.append(cheb2dScore.mean()*100)
 print("Chebyshev 2D Cross val error: ", 100 - cheb2dList[0])
 
-
 # Chebyshev 256D
 cheb256dList = []
 model8 = KNeighborsClassifier(n_neighbors=1, metric='chebyshev')
@@ -170,15 +166,10 @@ cheb256dScore = cross_val_score(model8, trainFeatures, trainDigits, cv = 10)
 cheb256dList.append(cheb256dScore.mean()*100)
 print("Chebyshev 256D Cross val error: ", 100 - cheb256dList[0])
 
-####################################
-
 oddKValaues = list(range(1,50,2))
-
 cvScores256d = []
 colorList = []
-
 cvstd = []
-
 for k in oddKValaues:
     model2 = KNeighborsClassifier(n_neighbors=k, metric='euclidean')
     model2.fit(trainFeatures, trainDigits)
@@ -196,9 +187,7 @@ for k in oddKValaues:
     colorList.append("b")
 
 zeroes = [0]*25
-
 csError256d = [100 - x for x in cvScores256d]
-
 mp.errorbar(oddKValaues, csError256d[25:], yerr = [tuple(zeroes), tuple(cvstd[25:])], ls='', )
 mp.errorbar(oddKValaues, csError256d[:25], yerr = [tuple(zeroes), tuple(cvstd[:25])], ls='', )
 mp.scatter(oddKValaues*2 , csError256d, s=3, c = colorList)
@@ -208,7 +197,6 @@ mp.title("Odd K value Cross Validation Graph")
 mp.title("Figure 1.3")
 mp.show()
 
-####################################################################################
 # Declare Model
 model = KNeighborsClassifier(n_neighbors=5)
 # Fit model to our data
@@ -242,7 +230,3 @@ mp.ylim(-1,1)
 mp.ylabel("Intensity Variance")
 mp.title("Figure 1.4 Decision Region for 256D")
 show()
-
-
-
-
